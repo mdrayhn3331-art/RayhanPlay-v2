@@ -5,10 +5,9 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
     collection,
-    addDoc,
+    addDoc,email: currentUser.email,
     doc,
     getDoc,
-    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 let currentUser = null;
@@ -27,7 +26,10 @@ window.submitWithdraw = async function () {
     const amount = Number(document.getElementById("amount").value);
     const number = document.getElementById("number").value;
     const method = document.getElementById("method").value;
-
+    if (!method || !number) {
+    alert("Please select payment method and enter your number");
+    return;
+    }
     const ref = doc(db, "users", currentUser.uid);
     const snap = await getDoc(ref);
 
@@ -54,9 +56,6 @@ window.submitWithdraw = async function () {
         createdAt: new Date().toISOString()
     });
 
-    await updateDoc(ref, {
-        balance: balance - amount
-    });
 
     alert("✅ Withdraw Request Submitted");
 };
