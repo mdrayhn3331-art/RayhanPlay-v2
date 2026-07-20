@@ -1,48 +1,51 @@
 import { auth, db } from "./firebase.js";
 
-import { onAuthStateChanged }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
-collection,
-query,
-where,
-getDocs
+  collection,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async(user)=>{
+const historyList = document.getElementById("historyList");
 
-if(!user)return;
+onAuthStateChanged(auth, async (user) => {
 
-const q=query(
-collection(db,"withdraws"),
-where("uid","==",user.uid)
-);
+  if (!user) {
+    location.href = "index.html";
+    return;
+  }
 
-const snap=await getDocs(q);
+  historyList.innerHTML = "";
 
-const list=document.getElementById("historyList");
+  const snapshot = await getDocs(collection(db, "withdraws"));
 
-list.innerHTML="";
+  let found = false;
 
-snap.forEach(doc=>{
+  snapshot.forEach((doc) => {
 
-const data=doc.data();
+    const data = doc.data();
 
-list.innerHTML+=`
+    if (data.uid === user.uid) {
 
-<div class="balance-card">
+      found = true;
 
-<h3>${data.method}</h3>
+      historyList.innerHTML += `
+        <div class="balance-card">
+          <p><b>Amount:</b> ${data.amount} Coins</p>
+          <p><b>Method:</b> ${data.method}</p>
+          <p><b>Number:</b> ${data.number}</p>
+          <p><b>Status:</b> ${data.status}</p>
+          <p><b>Date:</b> ${data.createdAt}</p>
+        </div>
+        <br>
+      `;
+    }
 
-<p>${data.amount} Coins</p>
+  });
 
-<p>Status : ${data.status}</p>
-
-</div>
-
-`;
-
-});
+  if (!found) {
+    historyList.innerHTML = "<p>No withdraw history found.</p>";
+  }
 
 });
