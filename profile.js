@@ -1,38 +1,46 @@
 import { auth, db } from "./firebase.js";
 
-import { onAuthStateChanged, signOut }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-import { doc, getDoc }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user)=>{
+onAuthStateChanged(auth, async (user) => {
 
-    if(!user){
+  if (!user) {
+    location.href = "index.html";
+    return;
+  }
 
-        location.href="index.html";
-        return;
+  document.getElementById("email").innerText = user.email;
+  document.getElementById("uid").innerText = user.uid;
 
-    }
+  const ref = doc(db, "users", user.uid);
+  const snap = await getDoc(ref);
 
-    document.getElementById("userEmail").innerText=user.email;
+  if (snap.exists()) {
+    const data = snap.data();
 
-    document.getElementById("userId").innerText=user.uid;
+    document.getElementById("balance").innerText =
+      (data.balance || 0) + " Coins";
 
-    const snap=await getDoc(doc(db,"users",user.uid));
-
-    if(snap.exists()){
-
-        document.getElementById("userBalance").innerText=snap.data().balance+" Coins";
-
-    }
+    document.getElementById("joinDate").innerText =
+      data.createdAt || "Unknown";
+  }
 
 });
 
-window.logout=async function(){
+window.logout = async function () {
 
-    await signOut(auth);
+  await signOut(auth);
 
-    location.href="index.html";
+  alert("Logged Out Successfully");
 
-}
+  location.href = "index.html";
+
+};
