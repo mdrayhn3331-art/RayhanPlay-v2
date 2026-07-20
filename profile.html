@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile - Rayhan Play</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Rayhan Play</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
     <div class="header">
         <h1>👤 My Profile</h1>
+        <p>Rayhan Play Account</p>
     </div>
 
     <div class="balance-card">
+        <h3>Current Balance</h3>
+        <h2 id="balance">0 Coins</h2>
+    </div>
 
-        <h3>Email</h3>
-        <p id="userEmail">Loading...</p>
+    <div class="profile-card">
 
-        <br>
+        <p><strong>📧 Email</strong></p>
+        <p id="email">Loading...</p>
 
-        <h3>User ID</h3>
-        <p id="userId">Loading...</p>
+        <hr>
 
-        <br>
+        <p><strong>🆔 User ID</strong></p>
+        <p id="uid">Loading...</p>
 
-        <h3>Balance</h3>
-        <h2 id="userBalance">0 Coins</h2>
+        <hr>
+
+        <p><strong>📅 Join Date</strong></p>
+        <p id="joinDate">Loading...</p>
 
     </div>
+
+    <br>
 
     <button onclick="logout()">🚪 Logout</button>
 
     <button onclick="location.href='index.html'">
-        🏠 Home
+        ⬅ Back
     </button>
 
 </div>
 
+<script type="module" src="firebase.js"></script>
 <script type="module" src="profile.js"></script>
 
 </body>
