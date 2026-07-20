@@ -1,0 +1,85 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:#fff;
+}
+
+.container{
+    width:90%;
+    max-width:420px;
+    margin:20px auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.header h1{
+    color:#FFD700;
+    font-size:34px;
+}
+
+.header p{
+    color:#cbd5e1;
+}
+
+.balance-card{
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+.balance-card h3{
+    color:#94a3b8;
+    margin-bottom:8px;
+}
+
+.balance-card h2{
+    font-size:32px;
+    color:#22c55e;
+}
+
+.login-box{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+input{
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+button{
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayhan Play</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>👑 Rayhan Play</h1>
+        <p>Earn Coins & Withdraw Money</p>
+    </div>
+
+    <div class="balance-card">
+        <h3>Total Balance</h3>
+        <h2 id="balance">0 Coins</h2>
+    </div>
+
+    <div class="login-box">
+        <input type="email" id="email" placeholder="Email">
+
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="register()">Register</button>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div class="menu">
+
+        <button onclick="dailyBonus()">
+            🎁 Daily Bonus
+        </button>
+
+        <button onclick="tasks()">
+            📋 Tasks
+        </button>
+
+        <button onclick="referral()">
+            👥 Referral
+        </button>
+
+        <button onclick="withdraw()">
+            💸 Withdraw
+        </button>
+
+        <button onclick="location.href='profile.html'">
+            👤 Profile
+        </button>
+
+    </div>
+
+</div>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module" src="app.js"></script>
+
+</body>
+</html>

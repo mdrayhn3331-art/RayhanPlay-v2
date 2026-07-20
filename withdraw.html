@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw - Rayhan Play</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>💸 Withdraw</h1>
+        <p>Minimum 10000 Coins</p>
+    </div>
+
+    <div class="login-box">
+
+        <select id="method">
+            <option value="bKash">bKash</option>
+            <option value="Nagad">Nagad</option>
+            <option value="Rocket">Rocket</option>
+        </select>
+
+        <input type="text" id="number" placeholder="Payment Number">
+
+        <input type="number" id="amount" placeholder="Coins">
+
+        <button onclick="submitWithdraw()">
+            Submit Withdraw
+        </button>
+
+    </div>
+
+    <button onclick="location.href='index.html'">
+        🏠 Home
+    </button>
+
+</div>
+
+<script type="module" src="withdraw.js"></script>
+
+</body>
+</html>
