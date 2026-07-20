@@ -2,32 +2,59 @@ import { db } from "./firebase.js";
 
 import {
   collection,
-  getDocs
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-async function loadWithdraws() {
+const requestList = document.getElementById("requestList");
 
-    const list = document.getElementById("withdrawList");
+async function loadRequests() {
 
-    list.innerHTML = "";
+  requestList.innerHTML = "";
 
-    const snap = await getDocs(collection(db, "withdraws"));
+  const querySnapshot = await getDocs(collection(db, "withdraws"));
 
-    snap.forEach((doc) => {
+  querySnapshot.forEach((item) => {
 
-        const data = doc.data();
+    const data = item.data();
 
-        list.innerHTML += `
-            <div class="balance-card">
-                <h3>${data.method}</h3>
-                <p>Number: ${data.number}</p>
-                <p>Amount: ${data.amount} Coins</p>
-                <p>Status: ${data.status}</p>
-            </div>
-        `;
+    requestList.innerHTML += `
+      <div class="card">
+        <p><b>Email:</b> ${data.email}</p>
+        <p><b>Amount:</b> ${data.amount}</p>
 
-    });
+        <button onclick="approve('${item.id}')">✅ Approve</button>
+
+        <button onclick="reject('${item.id}')">❌ Reject</button>
+      </div>
+    `;
+
+  });
 
 }
 
-loadWithdraws();
+window.approve = async function(id) {
+
+  await updateDoc(doc(db, "withdraws", id), {
+    status: "Approved"
+  });
+
+  alert("Withdraw Approved");
+
+  loadRequests();
+
+}
+
+window.reject = async function(id) {
+
+  await deleteDoc(doc(db, "withdraws", id));
+
+  alert("Withdraw Rejected");
+
+  loadRequests();
+
+}
+
+loadRequests();
